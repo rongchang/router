@@ -1,4 +1,5 @@
 require 'mina/rvm'
+require 'mina/git'
 require 'mina/slack'
 
 
@@ -12,7 +13,7 @@ set :shared_paths, ['config/redis_config.lua','log', 'backup']
 
 # Optional settings:
 set :user, 'ubuntu'    # Username in the server to SSH to.
-set :port, '52087'     # SSH port number.
+set :port, '22'     # SSH port number.
 set :identity_file, '../key/id_rsa'
 # set :bundle_bin, "/home/ubuntu/.rvm/gems/ruby-2.1.2/bin/bundle"
 set :rvm_path, '/home/ubuntu/.rvm/bin/rvm'
@@ -40,7 +41,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.1.2p95@default]'
+  invoke :'rvm:use[ruby-2.2.1p95@default]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
