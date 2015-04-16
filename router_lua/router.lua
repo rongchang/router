@@ -21,8 +21,8 @@ if not path then
     if model_path:get("is_initialized") then
         require 'reset_model_path'
     else
-        ngx.log(ngx.ERR, "failed to get redis key: ", err)
-        ngx.say "fail, model not found"
+        ngx.log("fail, model not found")
+        ngx.say("fail, model not found")
         return
     end
 end
