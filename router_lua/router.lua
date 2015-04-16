@@ -19,11 +19,11 @@ local path = model_path:get(key)
 
 if not path then
     if model_path:get("is_initialized") then
-        require 'reset_model_path'
-    else
         ngx.log("fail, model not found: "..key)
         ngx.say("fail, model not found")
         return
+    else
+        require 'reset_model_path'
     end
 end
 
