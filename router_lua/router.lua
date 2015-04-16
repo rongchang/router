@@ -70,9 +70,10 @@ if key then
     -- end
 
     if path then
-        ngx.var.target = path .. ngx.var.request_uri
---        ngx.log(ngx.ERR, "final_path: ", ngx.var.target)
-        return
+          --        ngx.log(ngx.ERR, "final_path: ", ngx.var.target)
+        -- ngx.var.target = path .. ngx.var.request_uri
+        --  return
+        return ngx.redirect(path .. ngx.var.request_uri)
     else
         ngx.log(ngx.ERR, "fail, model not found: "..key)
         ngx.say("fail, model not found: "..key)
