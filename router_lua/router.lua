@@ -20,10 +20,11 @@ local path = model_path:get(key)
 if not path then
     if model_path:get("is_initialized") then
         ngx.log("fail, model not found: "..key)
-        ngx.say("fail, model not found")
+        ngx.say("fail, model not found: "..key)
         return
     else
         require 'reset_model_path'
+        local path = model_path:get(key)
     end
 end
 
@@ -32,6 +33,12 @@ end
 --   ngx.var.target = ngx.var.target .. "?" .. ngx.var.args
 -- end
 
-ngx.var.target = path .. ngx.var.request_uri
+if path then
+    ngx.var.target = path .. ngx.var.request_uri
+    ngx.log(ngx.ERR, "final_path: ", ngx.var.target)
+    return
+else
+    ngx.log("fail, model not found: "..key)
+    ngx.say("fail, model not found: "..key)
+end
 
-ngx.log(ngx.ERR, "final_path: ", ngx.var.target)
