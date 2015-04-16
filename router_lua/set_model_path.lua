@@ -1,7 +1,7 @@
-local cjson = require "cjson"
+--local cjson = require "cjson"
 local args = ngx.req.get_uri_args()
-local const = ngx.shared.const;
-local model_path = ngx.shared.model_path;
+local const = ngx.shared.const
+local model_path = ngx.shared.model_path
 
 if args.model_name and args.server_name and args.host and args.path then
 
@@ -44,19 +44,11 @@ if args.model_name and args.server_name and args.host and args.path then
     if not res then
         ngx.say("bad result: ", err, ": ", errno, ": ", sqlstate, ".")
         return
+    else
+        model_path:set(args.model_name, args.host..args.path)
     end
 
     ngx.say("success")
-
-    local res, err, errno, sqlstate =
-        db:query("select * from model_paths")
-    if not res then
-        ngx.say("bad result: ", err, ": ", errno, ": ", sqlstate, ".")
-        return
-    end
-
-    ngx.say(cjson.encode(res))
-
 
 else
     ngx.say("model_name, server_name, host and path must be present all together")
