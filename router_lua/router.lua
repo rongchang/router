@@ -22,12 +22,45 @@ if key then
 
     if not path then
         if model_path:get("is_initialized") then
-            ngx.log("fail, model not found: "..key)
+            ngx.log(ngx.ERR, "fail, model not found: "..key)
             ngx.say("fail, model not found: "..key)
             return
         else
-            require 'reset_model_path'
-            local path = model_path:get(key)
+            --            require 'reset_model_path'
+            local mysql = require "resty.mysql"
+            local db, err = mysql:new()
+            local const = ngx.shared.const
+
+            local ok, err, errno, sqlstate = db:connect{
+
+                host = const:get("mysql_host"),
+                port = const:get("mysql_port"),
+                database = const:get("mysql_database"),
+                user = const:get("mysql_user"),
+                password = const:get("mysql_password"),
+                max_packet_size = const:get("mysql_max_packet_size") }
+
+            if not ok then
+                ngx.say("failed to connect: ", err, ": ", errno, " ", sqlstate)
+                return
+            end
+
+            local res, err, errno, sqlstate = db:query("select * from model_paths")
+            if not res then
+                ngx.say("bad result: ", err, ": ", errno, ": ", sqlstate, ".")
+                return
+            end
+
+            model_path:flush_all()
+
+            for i,v in pairs(res) do
+                model_path:set(v.model_name,v.host..v.path)
+            end
+
+            model_path:set("is_initialized", true)
+
+            path = model_path:get(key)
+            --            ngx.log(ngx.ERR, "78787878787: "..path)
         end
     end
 
