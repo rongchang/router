@@ -28,3 +28,15 @@ http://openresty.org/cn/
     const:set("path", "/data/router/current/")
     include /data/router/current/router_core/*.conf;
 
+
+    create table model_paths
+    (
+            id int unsigned not null auto_increment primary key,
+            model_name varchar(255) not null,
+            server_name varchar(255) not null,
+            ip varchar(255) not null,
+            path varchar(255) not null,
+            created_at datetime,
+            updated_at datetime
+    )
+

@@ -19,16 +19,21 @@ set :identity_file, '../key/id_rsa'
 set :rvm_path, '/home/ubuntu/.rvm/bin/rvm'
 
 case ENV['to']
-  when 'test'
+  when 'test01'
+    set :domain, '115.159.48.49'
+    set :deploy_to, '/data/router'
+  when 'test02'
     set :domain, '115.159.23.93'
     set :deploy_to, '/data/router'
-  # set :branch, 'f233'
+  when 'test03'
+    set :domain, '115.159.31.215'
+    set :deploy_to, '/data/router'
   when 'production'
     set :domain, '115.159.73.75'
     set :deploy_to, '/data/router'
-    # set :slack_url, "https://hooks.slack.com/services/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"
-    # set :slack_room, "#mina_deployment"
-    # set :slack_application, 'router'
+  # set :slack_url, "https://hooks.slack.com/services/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"
+  # set :slack_room, "#mina_deployment"
+  # set :slack_application, 'router'
   else
     p "Please set which environment to be deployed"
 end
