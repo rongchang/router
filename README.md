@@ -9,9 +9,9 @@ http://openresty.org/cn/
     cd ngx_openresty-VERSION/
 
     （注意下面的配置：）
-    ./configure --prefix=/opt/nginx \
+    (ubuntu)./configure --prefix=/opt/nginx \
             --with-luajit \
-            
+    (mac)./configure  --with-cc-opt="-I/usr/local/Cellar/pcre/8.36/include" --with-ld-opt="-L/usr/local/Cellar/pcre/8.36/lib" --with-luajit        
     make
     make install
 
