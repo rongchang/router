@@ -31,12 +31,14 @@ http://openresty.org/cn/
 
     create table model_paths
     (
-            id int unsigned not null auto_increment primary key,
-            model_name varchar(255) not null,
-            server_name varchar(255) not null,
-            ip varchar(255) not null,
-            path varchar(255) not null,
-            created_at datetime,
-            updated_at datetime
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `model_name` varchar(255) NOT NULL,
+        `server_name` varchar(255) NOT NULL,
+        `host` varchar(255) NOT NULL DEFAULT '',
+        `path` varchar(255) NOT NULL,
+        `created_at` datetime DEFAULT NULL,
+        `updated_at` datetime DEFAULT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `model_name` (`model_name`)
     )
 
