@@ -18,7 +18,7 @@ RUN cd /tmp && \
 	rm -rf /tmp/ngx_openresty-1.7.7.2
 
 
-ADD . /router
+ADD . /data/router/current/
 COPY  docker/nginx.conf /opt/nginx/nginx/conf/nginx.conf
 
 
