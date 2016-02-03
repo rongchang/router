@@ -1,0 +1,7 @@
+router:
+  image: router:test
+  container_name: router
+  env_file: docker/env.txt
+  expose:
+    - 80
+    - 12121
