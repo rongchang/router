@@ -1,0 +1,11 @@
+router:
+  image: index.alauda.cn/rongchang/router
+  container_name: router
+  external_links:
+    - "redis:redis"
+    - "elasticsearch:elasticsearch"
+    - "kafka:kafka"
+    - "mysql:mysql"
+  expose:
+    - 80
+    - 12121
