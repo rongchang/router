@@ -1,0 +1,24 @@
+files:
+  - path: /opt/nginx/nginx/conf/nginx.conf
+    task:
+      - type: replace
+        target: const:set("mysql_host", "-replace-")
+        value:
+          - <%= ENV['MYSQL_PORT_3306_TCP_ADDR']%>
+      - type: replace
+        target: const:set("mysql_port", -replace-)
+        value:
+          - <%= ENV['MYSQL_PORT_3306_TCP_PORT']%>
+      - type: replace
+        target: const:set("mysql_user", "-replace-")
+        value:
+          - 'root'
+      - type: replace
+        target: const:set("mysql_password", "-replace-")
+        value:
+          -
+      # - type: delete
+
+      - type: append
+        target: 'worker_processes  4;'
+        value: 'daemon off;'

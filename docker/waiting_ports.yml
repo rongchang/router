@@ -1,0 +1,4 @@
+ports:
+  - name: Mysql
+    ip: <%= ENV['MYSQL_PORT_3306_TCP_ADDR']%>
+    port: <%= ENV['MYSQL_PORT_3306_TCP_PORT']%>
